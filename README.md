@@ -27,3 +27,51 @@
 >
 > 이렇게 쉽게 해도 되는 걸까….ㅠ… 바로 디비에 저장해야되나..? 
 
+
+
+##### 2018-11-06
+
+- [x] twint 에러 해결
+- [x] vscode 연결
+- [ ] 데이터 파일 read 
+- [ ] nifi 설치 —> 했는데 hortonworks로 다시 깔기 
+
+> :memo:
+>
+> twint 정지계정트윗나면 에러남 -> output에 에러처리해주기(나중에 올려줘야지..)
+>
+> <br/>
+>
+> vm과 vscode 연결
+>
+> 1. vscode에서 extentsions 'Remote VSCode' 설치
+>
+> 2. rmate 설치
+>
+>    ```
+>    wget https://raw.githubusercontent.com/sclukey/rmate-python/master/bin/rmate
+>    chmod +x ./rmate
+>    sudo mv ./rmate /usr/local/bin/rmate 
+>    ```
+>
+> 3. `$ ssh -R 52698:localhost:52698 maria_dev@localhost -p 2222`
+>
+> 4. `$ rmate project/tw.py`
+>
+> :bug:
+>
+> hdfs에 test파일 올렸는데 한글 다 깨짐 -> `$ echo $LANG` `$ locale` 보면 제대로(ko_KR.UTF-8) 되어있는데ㅠ
+>
+> df로 만들면 스키마가 이상하게 c1, c2… 이렇게 됨…..  ---> csv load하면서 `header="true"` 빼먹음
+>
+> `UnicodeEncodeError: 'ascii' codec can't encode characters in position 1551-1552: ordinal not in range(128)` 파일 불러올 때 인코딩 설정하는데도 왜이러지...
+
+
+
+
+
+- [ ] timezone.. 같은 열 삭제
+- [ ] 같은 date, time, id인 행 삭제
+- [ ] hdfs로 보내기
+- [ ] hdfs파일 
+- [ ] git--sandbox
