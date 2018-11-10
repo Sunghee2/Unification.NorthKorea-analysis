@@ -1,6 +1,6 @@
 # President-Moon-Jae-in
 
-### Todo
+### Todo List
 
 **2018-11-04**
 
@@ -34,7 +34,7 @@
 - [x] twint 에러 해결
 - [x] vscode 연결
 - [ ] 데이터 파일 read 
-- [ ] nifi 설치 —> 했는데 hortonworks로 다시 깔기 
+- [x] nifi 설치 —> 했는데 hortonworks로 다시 깔기 
 
 > :memo:
 >
@@ -67,6 +67,27 @@
 > `UnicodeEncodeError: 'ascii' codec can't encode characters in position 1551-1552: ordinal not in range(128)` 파일 불러올 때 인코딩 설정하는데도 왜이러지...
 
 
+
+##### 18-11-10
+
+- [x] 데이터 파일 read -> 인코딩
+
+>:memo:
+>
+>nifi 실행 : `./bin/nifi.sh start` -> 포기^^;;
+>
+>:bug:
+>
+>여전히 한글 인코딩… `hadoop fs -text data/tweet_test.csv` 하면 잘보임… 테스트용 만들어보았는데 여전히 똑같... `df.show()`해서 안나오던 것이.. `print(df)` 하니깐 나옴...^^...
+>
+>```python
+>print(sys.stdout.encoding)
+>print(sys.stdout.isatty())
+>print(locale.getpreferredencoding())
+>print(sys.getfilesystemencoding())
+>```
+>
+>이제 출력은 되는데.. u"\ub098\ub3c4 \uc5ec\uae30\uc11c \uc774 \uc9c0\ub784\ub4e4 \ud558\uace0\uc788\uc9c0\ub9cc... \ubaa8\ub450 이렇게 출력됨..
 
 
 
