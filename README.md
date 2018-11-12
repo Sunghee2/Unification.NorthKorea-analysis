@@ -98,6 +98,7 @@
 - [x] date time 합치기
 - [x] 시간 조정
 - [x] 필요없는 열 삭제
+- [x] konlp 명사 나누기
 
 > :memo: 
 >
@@ -120,6 +121,10 @@
 > date 변경하는데 안됨 -> date에 이상한 주소가 들어가 있음.. `errors='coerce'` 추가
 >
 > `AttributeError: type object 'datetime.datetime' has no attribute 'timedelta'` -> `from datetime import datetime` 을 `import datetime` 으로 변경
+>
+> konlp 설치 중 `error: command 'gcc' failed with exit status 1` -> `xcode-select --install`
+>
+> `RuntimeError: No matching overloads found for simplePos09 in find` -> string으로 타입 바꿔줌
 
 
 
@@ -129,3 +134,9 @@
 - [ ] hdfs로 보내기
 - [ ] hdfs파일 
 - [ ] git--sandbox
+
+<br/>
+
+> 참고
+>
+> https://konlpy-ko.readthedocs.io/ko/v0.4.3/examples/wordcloud/
