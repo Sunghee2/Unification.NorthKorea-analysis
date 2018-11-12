@@ -27,7 +27,7 @@
 >
 > 이렇게 쉽게 해도 되는 걸까….ㅠ… 바로 디비에 저장해야되나..? 
 
-
+<br/>
 
 ##### 2018-11-06
 
@@ -66,7 +66,7 @@
 >
 > `UnicodeEncodeError: 'ascii' codec can't encode characters in position 1551-1552: ordinal not in range(128)` 파일 불러올 때 인코딩 설정하는데도 왜이러지...
 
-
+<br/>
 
 ##### 18-11-10
 
@@ -89,9 +89,42 @@
 >
 >이제 출력은 되는데.. u"\ub098\ub3c4 \uc5ec\uae30\uc11c \uc774 \uc9c0\ub784\ub4e4 \ud558\uace0\uc788\uc9c0\ub9cc... \ubaa8\ub450 이렇게 출력됨..
 
+<br/>
+
+##### 18-11-12
+
+- [ ] nifi 설치
+- [ ] virtual box git.....
+- [x] date time 합치기
+- [x] 시간 조정
+- [x] 필요없는 열 삭제
+
+> :memo: 
+>
+> 다시 nifi 도전해보자..!
+>
+> :bug:
+>
+> `mount: unknown filesystem type 'vboxsf'` -> VBoxGuestAdditions 설치(버전 맞게)
+>
+> 실행x -> `sudo yum install gcc kernel-devel make bzip2 ` -> `VBoxLinuxAdditions.run` 실행
+>
+> `Please install the Linux kernel "header" files matching the current kernel`
+>
+> `mount: only root can use "--types" option`
+>
+> <br/>
+>
+> `sys:1: DtypeWarning: Columns (0,1,2,6) have mixed types. Specify dtype option on import or set low_memory=False.` -> read_csv에서 dtype 설정
+>
+> date 변경하는데 안됨 -> date에 이상한 주소가 들어가 있음.. `errors='coerce'` 추가
+>
+> `AttributeError: type object 'datetime.datetime' has no attribute 'timedelta'` -> `from datetime import datetime` 을 `import datetime` 으로 변경
 
 
-- [ ] timezone.. 같은 열 삭제
+
+
+
 - [ ] 같은 date, time, id인 행 삭제
 - [ ] hdfs로 보내기
 - [ ] hdfs파일 
