@@ -33,3 +33,11 @@ def get_tags(text):
     # print(nouns)
     return str_nouns
 
+df = read_data('data/tweet_test.csv')
+
+# date_time에 맞지 않는 데이터 삭제
+df['date_time'] = pd.to_datetime(df['date_time'], errors='coerce')
+
+# 시간 조정
+df['date_time'] = df['date_time'] - datetime.timedelta(hours=16)
+
