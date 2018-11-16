@@ -31,7 +31,12 @@ def get_tags(text):
 
     # count = Counter(nouns)
     # print(nouns)
+    str_nouns = "|".join(nouns)
     return str_nouns
+
+def get_sentiment(text):
+    s = classifier.classify(text)
+    return s
 
 df = read_data('data/tweet_test.csv')
 
@@ -41,3 +46,10 @@ df['date_time'] = pd.to_datetime(df['date_time'], errors='coerce')
 # 시간 조정
 df['date_time'] = df['date_time'] - datetime.timedelta(hours=16)
 
+# 단어별로 자른 것 넣을 새로운 column 만들기
+df['word'] = ''
+
+# 명사별로 자르고 word column에 값 넣기
+for row in df.head().itertuples():
+    word_str = get_tags(row.tweet)
+    df.at[row.Index, 'word'] = word_str
