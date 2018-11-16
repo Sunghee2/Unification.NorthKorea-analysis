@@ -1,5 +1,44 @@
 # President-Moon-Jae-in
 
+### 분석
+
+1. 긍부정 평가(긍정적, 부정적 표현), 긍부정 추이(언제 긍정적이고 부정적이게 되었는가)
+
+2. 연관어 분석 . 페이스북 포스트를 긁어모아 워드클라우드 그림. 무엇이 부각되는지 
+
+   > https://m.blog.naver.com/rhkdgns2008/220984098723
+
+3. 관련 기사 제목
+
+   >  https://m.blog.naver.com/rhkdgns2008/220891923938
+   >
+   > sns를 어떤 감정을 표현하기 위한 도구로 사용하는지
+
+4. 검색량 추이로 사람들의 관심이 증가했는지(네이버 구글), 지역별로도 가능
+
+5. 대중은 어떻게 바라보고 있는가~
+
+
+
+> 트위터 분석 예
+>
+> https://m.blog.naver.com/rhkdgns2008/220824770827
+>
+>
+
+### 데이터 전처리
+
+http://aileen93.tistory.com/128 꼭 참고!!
+
+https://programmers.co.kr/learn/courses/21
+
+https://www.lucypark.kr/courses/2015-dm/text-mining.html
+
+- 특수문자, 단어 형태소 분석 등의 처리 등을 하는 단계
+- 불용어 제거하기
+- 중복데이터 제거
+- 
+
 ### Todo List
 
 **2018-11-04**
@@ -94,7 +133,7 @@
 ##### 18-11-12
 
 - [ ] nifi 설치
-- [ ] virtual box git.....
+- [ ] virtual box git..... -> 이미 있음..ㅎ
 - [x] date time 합치기
 - [x] 시간 조정
 - [x] 필요없는 열 삭제
@@ -126,17 +165,95 @@
 >
 > `RuntimeError: No matching overloads found for simplePos09 in find` -> string으로 타입 바꿔줌
 
+<br/>
 
+##### 18-11-13
 
+- [ ] nlp자른 것 df 저장
+- [ ] nifi설치
 
-
-- [ ] 같은 date, time, id인 행 삭제
-- [ ] hdfs로 보내기
-- [ ] hdfs파일 
-- [ ] git--sandbox
+> :memo:
+>
+> 한나눔이 다른 것보다 외래어, 영어, 한자 잘 잡아냄.
+>
+> :bug:
+>
+> `ValueError: Length of values does not match length of index` -> 한번에 전체로 나와서 따로 따로 
+>
+> 리스트 df에 저장이 안됨...
+>
+> `ImportError: No module named ambari_commons.exceptions`
+>
+> ambari 이상해져서 가상머신 새로 했더니 `unable to sign in. invalid username/password combination.` admin계정 로그인 안됨 -> `# ambari-admin-password-reset` 
+>
+> 엄청난 삽질 끝에.. `# ambari-server setup` 
+>
+> `# ambari-server install-mpack --mpack=http://public-repo-1.hortonworks.com/HDF/centos7/3.x/updates/3.2.0.0/tars/hdf_ambari_mp/hdf-ambari-mpack-3.2.0.0-520.tar.gz --verbose` 
+>
+> https://docs.hortonworks.com/HDPDocuments/HDF3/HDF-3.2.0/release-notes/content/hdf_repository_locations.html
+>
+> ambari에서 nifi 추가하는데 설치 안됨 -> 버전 안맞았음ㅠ 현 ambari 버전 2.6.2 최소 2.7 이어야됨.
+>
+> https://supportmatrix.hortonworks.com/
+>
+> https://docs.hortonworks.com/HDPDocuments/Ambari-2.7.0.0/bk_ambari-upgrade/content/upgrade_ambari.html < 관련 문서. 내일 해보자
 
 <br/>
+
+##### 18-11-14
+
+- [x] ambari update
+
+>:bug:
+>
+>`ImportError: No module named ambari_commons.exceptions` -> 앞에 sudo
+>
+>nifi ui가 실행 안됨..9090포트
+>
+>`Permission denied: 'conf/bootstrap.conf'` -> 루트계정으로
+>
+>가정 1. 포트번호
+>
+>2. 로컬호스트
+>3. admin 권한
+
+##### 18-11-15
+
+> hive 이상해진게 버전 문제 인 것 같다.. HDP버전 생각 못함ㅠ마지막으로 다시 삭제설치해보기..^^;;;
+>
+> 버전 맞는데도 안됨.. -> hive nifi 충돌인가 ㅠㅠ
+>
+> https://supportmatrix.hortonworks.com/
+
+<br/>
+
+##### 18-11-16
+
+- [x] 명사로 나눈 것 str | 로 나눈 것으로 변환
+- [x] 중복 행 제거
+
+> :memo:
+>
+> iterrows()보다 itertuples()이 훨씬 빠름
+>
+> df 값 그냥 update하면 에러남 -> index로 at[] 이용하여 값 변경하기
+>
+> :bug:
+>
+> `ModuleNotFoundError: No module named 'NumPy'` -> numpy 소문자로 쓰니 해결
 
 > 참고
 >
 > https://konlpy-ko.readthedocs.io/ko/v0.4.3/examples/wordcloud/
+
+> 데이터 시각화
+>
+> https://m.blog.naver.com/rhkdgns2008/221007479396
+>
+> https://www.tableau.com/ko-kr/products/cloud-bi
+>
+> https://www.dremio.com/trump-twitter-sentiment-analysis/
+
+> http://www.zinicap.kr/archives/2433 나중에 이런식으로 수집한 수 아이디 알려주면 될 듯
+>
+> https://github.com/Ahneunjeong/bigdata-foodelivery/blob/master/배달분석발표자료.pdf
