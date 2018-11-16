@@ -8,26 +8,34 @@ from collections import Counter
 from nltk.classify import NaiveBayesClassifier
 
 def read_data(filepath):
-    # usecols = [
-    #     'id', 'conversation_id', 'date', 'time',
-    #     'username', 'name', 'tweet'
-    # ]
+    usecols = [
+        'id', 'conversation_id', 'date', 'time',
+        'username', 'name', 'tweet'
+    ]
+    # dtype = {
+    #     'id':
+    # }
 
     df = pd.read_csv(filepath,
         # usecols=usecols,
         parse_dates=[['date', 'time']],
-        # dtype={
-        #     'id': pd.np.float64
-        # },
+        dtype={
+            'username': str
+        },
+        error_bad_lines=False,
+        warn_bad_lines=True
         # encoding='utf-8'
     )
     return df
 
+# def preprocess_text(text):
+
+
+
 # 명사 추출
-# def get_tags(text, ntags=50, multiplier=10):
 def get_tags(text):
     h = Hannanum()
-    nouns = h.nouns(str(text))
+    nouns = h.nouns(text)
 
     # count = Counter(nouns)
     # print(nouns)
@@ -40,25 +48,46 @@ def get_sentiment(text):
 
 df = read_data('data/tweet_test.csv')
 
+# 중복 제거
+df = df.drop_duplicates()
+
 # date_time에 맞지 않는 데이터 삭제
 df['date_time'] = pd.to_datetime(df['date_time'], errors='coerce')
+df['id'] = pd.to_numeric(df['id'], errors='coerce')
+df['conversation_id'] = pd.to_numeric(df['conversation_id'], errors='coerce')
 
 # 시간 조정
 df['date_time'] = df['date_time'] - datetime.timedelta(hours=16)
+
+# tweet column 타입 string으로 변경 & 소문자로 변경
+df['tweet'] = df.tweet.astype(str)
+df['tweet'] = df['tweet'].apply(lambda x: x.lower())
+ 
+# hashtag 분리
+df['hashtag'] = df['tweet'].str.findall(r'#.*?(?=\s|$)')
+for row in df.itertuples():
+    df.at[row.Index, 'hashtag'] = "|".join(row.hashtag)
+
+# mention 분리
+df['mention'] = df['tweet'].str.findall(r'@.*?(?=\s|$)')
+for row in df.itertuples():
+    df.at[row.Index, 'mention'] = "|".join(row.mention)
 
 # 단어별로 자른 것 넣을 새로운 column 만들기
 df['word'] = ''
 
 # 명사별로 자르고 word column에 값 넣기
+# head로 설정해놔서 나중에 없애고 다시 테스트
 for row in df.head().itertuples():
     word_str = get_tags(row.tweet)
     df.at[row.Index, 'word'] = word_str
     # df.set_value(row.Index, 'word', word_str)
 
-# 중복 제거
-df = df.drop_duplicates()
+# 결측값 있을 시 제거
+# df['id'].dropna()
 
-print(df.tail())
+print(df['mention'].head(30))
+# print(df.dtypes)
 print(len(df.index))
  
 # print(df['new'].head())

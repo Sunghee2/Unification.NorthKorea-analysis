@@ -37,7 +37,7 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 - 특수문자, 단어 형태소 분석 등의 처리 등을 하는 단계
 - 불용어 제거하기
 - 중복데이터 제거
-- 
+- 같은 의미를 지니는 텍스트는 카테고리화
 
 ### Todo List
 
@@ -231,12 +231,17 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 
 - [x] 명사로 나눈 것 str | 로 나눈 것으로 변환
 - [x] 중복 행 제거
+- [ ] 이상치 처리
+- [x] hashtag 분리
+- [x] mention 분리
 
 > :memo:
 >
 > iterrows()보다 itertuples()이 훨씬 빠름
 >
 > df 값 그냥 update하면 에러남 -> index로 at[] 이용하여 값 변경하기
+>
+> 도배하는 트윗들 없애버릴까?...
 >
 > :bug:
 >
@@ -257,3 +262,5 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > http://www.zinicap.kr/archives/2433 나중에 이런식으로 수집한 수 아이디 알려주면 될 듯
 >
 > https://github.com/Ahneunjeong/bigdata-foodelivery/blob/master/배달분석발표자료.pdf
+>
+> https://wikidocs.net/16574
