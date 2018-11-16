@@ -53,3 +53,26 @@ df['word'] = ''
 for row in df.head().itertuples():
     word_str = get_tags(row.tweet)
     df.at[row.Index, 'word'] = word_str
+    # df.set_value(row.Index, 'word', word_str)
+
+# 중복 제거
+df = df.drop_duplicates()
+
+print(df.tail())
+print(len(df.index))
+ 
+# print(df['new'].head())
+# print(get_tags(df['tweet'].head()))
+
+# df['tweet1'] = pd.Series(get_tags(str(df['tweet'])))
+# print(get_tags(str(df['tweet'])))
+
+# okt = Okt()
+# list_d = okt.pos(str(df['tweet']))
+# df2 = pd.DataFrame()
+# print(list_d)
+
+# def tokenize(doc):
+#     return ['/'.join(t) for t in pos_tagger.pos(doc, norm=True, stem=True)]
+# train_docs1 = [(tokenize(row[1]), row[2]) for row in train_data]
+# print(train_docs1)
