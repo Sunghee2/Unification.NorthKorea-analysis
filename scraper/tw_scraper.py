@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import twint
+import os
+# 이전 파일 삭제 
+file = './data/tweets.csv'
+if os.path.isfile(file):
+    os.remove(file)
 
 c = twint.Config()
 c.Search = "문재인"
