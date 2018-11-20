@@ -208,7 +208,7 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 >`ImportError: No module named ambari_commons.exceptions` -> 앞에 sudo
 >
->nifi ui가 실행 안됨..9090포트
+>nifi ui가 실행 안됨..9090포트 -> /private/etc/hosts에서 `127.0.0.1 localhost sandbox.hortonworks.com sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com` 추가! -> 안됨ㅠ
 >
 >`Permission denied: 'conf/bootstrap.conf'` -> 루트계정으로
 >
@@ -246,6 +246,19 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > :bug:
 >
 > `ModuleNotFoundError: No module named 'NumPy'` -> numpy 소문자로 쓰니 해결
+
+<br/>
+
+##### 18-11-20
+
+- [x] scraper 날짜 유동적이도록 고치기 / 파일 삭제
+- [ ] 
+
+> :bug:
+>
+> 터미널 시간 이상하게 나옴 -> `sudo date {month}{day}{hour}{minute}{year} ` ex) 2018년 11월 20일 18시 24분 -> `sudo date 1120182418`
+>
+> twitter가 계정마다 시간설정 이상하게 되어있음 -> twitter 로그인 -> 설정 에서 고쳐주면 됨. GMT+9(csv는 utc시간)
 
 > 참고
 >
