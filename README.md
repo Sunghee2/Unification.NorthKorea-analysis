@@ -39,6 +39,10 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 - 중복데이터 제거
 - 같은 의미를 지니는 텍스트는 카테고리화
 
+### 계획
+
+스크래퍼 계속 밤마다 돌리고 -> 전처리과정(시간 고치고 컬럼.., 단어별로 분류) -> 긍부정 나누기() -> 데이터 분석 -> 시각화
+
 ### Todo List
 
 **2018-11-04**
@@ -217,6 +221,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >2. 로컬호스트
 >3. admin 권한
 
+<br/>
+
 ##### 18-11-15
 
 > hive 이상해진게 버전 문제 인 것 같다.. HDP버전 생각 못함ㅠ마지막으로 다시 삭제설치해보기..^^;;;
@@ -272,9 +278,21 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 
 ##### 18-11-21
 
-> 긍부정 학습할 데이터 http://word.snu.ac.kr/kosac/lexicon.php 에서 얻음.
+> :memo:
 >
+> 긍부정 학습할 데이터 http://word.snu.ac.kr/kosac/lexicon.php 에서 얻음. > http://word.snu.ac.kr/kosac/pub/PACLIC26.pdf
 >
+> https://docs.google.com/spreadsheets/d/1OGAjUvalBuX-oZvZ_-9tEfYD2gQe7hTGsgUpiiBSXI8/edit#gid=0 -> KoNLPy tag chart -> 위 학습데이터는 Komoran과 가장 비슷한듯
+>
+> :bug:
+>
+> `ImportError: No module named numpy` -> `sudo pip install numpy ` `sudo pip install --trusted-host pypi.python.org --trusted-host files.pythonhosted.org --trusted-host pypi.org numpy`-> RegressionEvaluator import에서 위 에러 남. 아직 해결x
+
+<br/>
+
+학습데이터 ngram ; /로 나눠야됨
+
+<br/>
 
 > 참고
 >
