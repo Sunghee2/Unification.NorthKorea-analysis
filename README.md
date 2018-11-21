@@ -251,18 +251,36 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 
 ##### 18-11-20
 
-- [x] scraper 날짜 유동적이도록 고치기 / 파일 삭제
-- [ ] 
+- [x] scraper 날짜 유동적이도록 고치기 + 파일 삭제
+- [ ] oozie python shell
 
+> :memo:
+>
+> python scraper oozie에 올리기
+>
+> `hdfs fs -put {vm} {hdfs}`
+>
 > :bug:
 >
 > 터미널 시간 이상하게 나옴 -> `sudo date {month}{day}{hour}{minute}{year} ` ex) 2018년 11월 20일 18시 24분 -> `sudo date 1120182418`
 >
 > twitter가 계정마다 시간설정 이상하게 되어있음 -> twitter 로그인 -> 설정 에서 고쳐주면 됨. GMT+9(csv는 utc시간)
+>
+> `/usr/bin/env: python3: No such file or directory` -> oozie에 python3 설치해야되는듯...
+
+<br/>
+
+##### 18-11-21
+
+> 긍부정 학습할 데이터 http://word.snu.ac.kr/kosac/lexicon.php 에서 얻음.
+>
+>
 
 > 참고
 >
 > https://konlpy-ko.readthedocs.io/ko/v0.4.3/examples/wordcloud/
+>
+> http://word.snu.ac.kr/kosac/lexicon.php
 
 > 데이터 시각화
 >
