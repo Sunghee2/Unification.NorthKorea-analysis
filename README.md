@@ -290,7 +290,22 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 
 <br/>
 
-학습데이터 ngram ; /로 나눠야됨
+##### 18-11-22
+
+- [x] 형태소 나눈 것 ;/로 바꿈
+- [x] 학습데이터 만들 것 처리 : 형태소 분리, 감정 사전 읽어와서 비교 
+
+>다 스파크로 전처리 해야할 듯... -> 시간이 있을까???ㅠ 다른 것부터하고 시간 남으면 바꾸자..
+>
+>스크래퍼.. 굳이 hdfs에서 파일 삭제할 필요가 있을까? -> 일단 주석처리
+>
+>감정 분석 -> 감정 사전 밖에 없음.. -> 이것 이용해서 내가 학습데이터 만들자
+>
+>:bug:
+>
+>`[UnicodeEncodeError: 'ascii' codec can't encode character](https://stackoverflow.com/questions/39662384/pyspark-unicodeencodeerror-ascii-codec-cant-encode-character)` -> spark에서 show할 때마다 나는 에러 => spark run하기 전에 `$ export PYTHONIOENCODING=utf8` 입력하면 됨!
+>
+>oozie... running 8시간째…… 
 
 <br/>
 
