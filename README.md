@@ -167,6 +167,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 > konlp 설치 중 `error: command 'gcc' failed with exit status 1` -> `xcode-select --install`
 >
+> 만약 `xcode-select: command not found` 라고 뜨면 직접 apple developers에서 command line tools다운
+>
 > `RuntimeError: No matching overloads found for simplePos09 in find` -> string으로 타입 바꿔줌
 
 <br/>
@@ -306,8 +308,26 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >`[UnicodeEncodeError: 'ascii' codec can't encode character](https://stackoverflow.com/questions/39662384/pyspark-unicodeencodeerror-ascii-codec-cant-encode-character)` -> spark에서 show할 때마다 나는 에러 => spark run하기 전에 `$ export PYTHONIOENCODING=utf8` 입력하면 됨!
 >
 >oozie... running 8시간째…… 
+>
+>다시 설치했더니 카산드라 안됨... 마지막으로 또 삭제해보자..^... -> 역시 삭제는 진리다
 
 <br/>
+
+##### 18-11-24
+
+> :memo:
+>
+> python 실행할 때 맨 위 python argument에 파일 이름!!!! 그리고 file에 해당 파일 넣기!!! 며칠동안삽질이엇나ㅠ
+>
+> python3.6으로 입력하면 3버전도 됨!
+>
+> :bug:
+>
+> oozie 왜 echo도 안되니,,,,,,
+>
+> `Failing Oozie Launcher, Main class [org.apache.oozie.action.hadoop.ShellMain]`
+>
+>
 
 > 참고
 >
