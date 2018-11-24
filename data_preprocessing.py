@@ -2,8 +2,9 @@
 import pandas as pd
 import datetime
 import numpy as np
-from konlpy.tag import Hannanum
-from konlpy.tag import Okt
+# from konlpy.tag import Hannanum
+# from konlpy.tag import Okt
+from konlpy.tag import Komoran
 from collections import Counter
 from nltk.classify import NaiveBayesClassifier
 
@@ -32,15 +33,19 @@ def read_data(filepath):
 
 
 
-# 명사 추출
-def get_tags(text):
-    h = Hannanum()
-    nouns = h.nouns(text)
+# 형태소 분리
+# def get_tags(text):
+#     nouns = h.nouns(text)
 
-    # count = Counter(nouns)
-    # print(nouns)
-    str_nouns = "|".join(nouns)
-    return str_nouns
+#     # count = Counter(nouns)
+#     # print(nouns)
+#     str_nouns = "|".join(nouns)
+#     return str_nouns
+def get_tags(text):
+    pos = komoran.pos(text)
+    # str_pos = ";".join(map(str, pos))
+    str_pos = ";".join(map("/".join, pos))
+    return str_pos
 
 def get_sentiment(text):
     s = classifier.classify(text)
@@ -78,6 +83,7 @@ df['word'] = ''
 
 # 명사별로 자르고 word column에 값 넣기
 # head로 설정해놔서 나중에 없애고 다시 테스트
+komoran = Komoran()
 for row in df.head().itertuples():
     word_str = get_tags(row.tweet)
     df.at[row.Index, 'word'] = word_str
@@ -86,7 +92,9 @@ for row in df.head().itertuples():
 # 결측값 있을 시 제거
 # df['id'].dropna()
 
-print(df['mention'].head(30))
+
+# test
+print(df['word'].head(30))
 # print(df.dtypes)
 print(len(df.index))
  
