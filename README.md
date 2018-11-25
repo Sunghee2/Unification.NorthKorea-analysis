@@ -327,7 +327,26 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 > `Failing Oozie Launcher, Main class [org.apache.oozie.action.hadoop.ShellMain]`
 >
+
+<br/>
+
+##### 18-11-25
+
+- [x] 감정분석시 중복점수되는 것 해결
+- [ ] spark noun 나눠서 top 20 뽑기
+- [x] python으로 전처리한 것 => 스파크로 바꾸기
+- [x] twitter로 tokenizer 바꾸기
+- [x] csv 저장
+
+> :memo:
 >
+> 감정사전 자료가 pos(약 만이천개), neg(약 사천개)라서 항상 긍정으로 나오는데 어떡하냐……... 너무 압도적이라서 %도 안됨..
+>
+> 스파크는 tokenizer가 없고... python은 oozie에서 하자니... gcc가 안되고......
+>
+> :bug:
+>
+> `xcode-select: command not found` 여기서는 xcode CLT 못설치하는데 그럼 로컬에서 해야되는건가....ㅠ
 
 > 참고
 >
