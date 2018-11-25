@@ -5,13 +5,17 @@ import numpy as np
 # from konlpy.tag import Hannanum
 # from konlpy.tag import Okt
 from konlpy.tag import Komoran
+from konlpy.tag import Twitter
 from collections import Counter
 from nltk.classify import NaiveBayesClassifier
 
 def read_data(filepath):
+    # usecols = [
+    #     'id', 'conversation_id', 'date', 'time',
+    #     'username', 'name', 'tweet'
+    # ]
     usecols = [
-        'id', 'conversation_id', 'date', 'time',
-        'username', 'name', 'tweet'
+        'date', 'time', 'tweet'
     ]
     # dtype = {
     #     'id':
@@ -51,7 +55,12 @@ def get_sentiment(text):
     s = classifier.classify(text)
     return s
 
-df = read_data('data/tweet_test.csv')
+def get_nouns(text):
+    twitter = Twitter()
+    nouns = twitter.nouns(text)
+    return nouns
+
+df = read_data('./data/tweet_test.csv')
 
 # 중복 제거
 df = df.drop_duplicates()
@@ -83,20 +92,28 @@ df['word'] = ''
 
 # 명사별로 자르고 word column에 값 넣기
 # head로 설정해놔서 나중에 없애고 다시 테스트
-komoran = Komoran()
-for row in df.head().itertuples():
-    word_str = get_tags(row.tweet)
-    df.at[row.Index, 'word'] = word_str
+# komoran = Komoran()
+# for row in df.head().itertuples():
+#     word_str = get_tags(row.tweet)
+#     df.at[row.Index, 'word'] = word_str
     # df.set_value(row.Index, 'word', word_str)
+
+# 트위터 클래스 변경
+for row in df.itertuples():
+    word_str = get_nouns(row.tweet)
+    df.at[row.Index, 'word'] = word_str
 
 # 결측값 있을 시 제거
 # df['id'].dropna()
 
+print(df['word'])
+
+# csv 저장
+df.to_csv("./data/result.csv", mode="w")
+
 
 # test
-print(df['word'].head(30))
 # print(df.dtypes)
-print(len(df.index))
  
 # print(df['new'].head())
 # print(get_tags(df['tweet'].head()))
