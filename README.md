@@ -337,16 +337,26 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 - [x] python으로 전처리한 것 => 스파크로 바꾸기
 - [x] twitter로 tokenizer 바꾸기
 - [x] csv 저장
+- [x] hbase 저장
 
 > :memo:
 >
 > 감정사전 자료가 pos(약 만이천개), neg(약 사천개)라서 항상 긍정으로 나오는데 어떡하냐……... 너무 압도적이라서 %도 안됨..
 >
-> 스파크는 tokenizer가 없고... python은 oozie에서 하자니... gcc가 안되고......
+> 스파크는 tokenizer가 없고(있는줄알았는데 pyspark가아니였음..)... python은 oozie에서 하자니... gcc가 안되고......
 >
 > :bug:
 >
 > `xcode-select: command not found` 여기서는 xcode CLT 못설치하는데 그럼 로컬에서 해야되는건가....ㅠ
+>
+> `UnicodeDecodeError: 'ascii' codec can't decode byte 0xc2 in position 371: ordinal not in range(128)` -> `with open("./data/result.csv", "r", encoding="utf-8")` 
+
+<br/>
+
+##### 18-11-26
+
+- [ ] date 추출되는지 확인할 것!
+- [ ] hbase 저장할 column 지정(날짜를 맨 앞에 리트윗수, word, @, 해시태그...)
 
 > 참고
 >
