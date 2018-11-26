@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
 import pandas as pd
 import datetime
 import numpy as np
@@ -7,7 +7,9 @@ from konlpy.tag import Okt
 # from konlpy.tag import Komoran
 # from konlpy.tag import Twitter
 from collections import Counter
-from nltk.classify import NaiveBayesClassifier
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 def read_data(filepath):
     # usecols = [
