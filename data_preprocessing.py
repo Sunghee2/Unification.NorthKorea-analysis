@@ -58,7 +58,8 @@ def read_data(filepath):
 def get_nouns(text):
     # twitter = Twitter()
     nouns = okt.nouns(text)
-    return nouns
+    str_nouns = "|".join(nouns)
+    return str_nouns
 
 df = read_data('./data/tweet_test.csv')
 
@@ -108,6 +109,7 @@ for row in df.itertuples():
 # 결측값 있을 시 제거
 # df['id'].dropna()
 
+# print(df['word'].head())
 
 # csv 저장
 df.to_csv("./data/result.csv", mode="w")
