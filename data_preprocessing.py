@@ -3,9 +3,9 @@ import pandas as pd
 import datetime
 import numpy as np
 # from konlpy.tag import Hannanum
-# from konlpy.tag import Okt
-from konlpy.tag import Komoran
-from konlpy.tag import Twitter
+from konlpy.tag import Okt
+# from konlpy.tag import Komoran
+# from konlpy.tag import Twitter
 from collections import Counter
 from nltk.classify import NaiveBayesClassifier
 
@@ -14,9 +14,9 @@ def read_data(filepath):
     #     'id', 'conversation_id', 'date', 'time',
     #     'username', 'name', 'tweet'
     # ]
-    usecols = [
-        'date', 'time', 'tweet'
-    ]
+    # usecols = [
+    #     'date', 'time', 'tweet'
+    # ]
     # dtype = {
     #     'id':
     # }
@@ -45,19 +45,19 @@ def read_data(filepath):
 #     # print(nouns)
 #     str_nouns = "|".join(nouns)
 #     return str_nouns
-def get_tags(text):
-    pos = komoran.pos(text)
-    # str_pos = ";".join(map(str, pos))
-    str_pos = ";".join(map("/".join, pos))
-    return str_pos
+# def get_tags(text):
+#     pos = komoran.pos(text)
+#     # str_pos = ";".join(map(str, pos))
+#     str_pos = ";".join(map("/".join, pos))
+#     return str_pos
 
-def get_sentiment(text):
-    s = classifier.classify(text)
-    return s
+# def get_sentiment(text):
+#     s = classifier.classify(text)
+#     return s
 
 def get_nouns(text):
-    twitter = Twitter()
-    nouns = twitter.nouns(text)
+    # twitter = Twitter()
+    nouns = okt.nouns(text)
     return nouns
 
 df = read_data('./data/tweet_test.csv')
@@ -72,6 +72,7 @@ df['conversation_id'] = pd.to_numeric(df['conversation_id'], errors='coerce')
 
 # 시간 조정
 df['date_time'] = df['date_time'] - datetime.timedelta(hours=16)
+df['date'] = df['date_time'].dt.date
 
 # tweet column 타입 string으로 변경 & 소문자로 변경
 df['tweet'] = df.tweet.astype(str)
@@ -99,6 +100,7 @@ df['word'] = ''
     # df.set_value(row.Index, 'word', word_str)
 
 # 트위터 클래스 변경
+okt = Okt()
 for row in df.itertuples():
     word_str = get_nouns(row.tweet)
     df.at[row.Index, 'word'] = word_str
@@ -106,7 +108,6 @@ for row in df.itertuples():
 # 결측값 있을 시 제거
 # df['id'].dropna()
 
-print(df['word'])
 
 # csv 저장
 df.to_csv("./data/result.csv", mode="w")
