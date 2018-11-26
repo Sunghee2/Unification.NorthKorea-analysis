@@ -355,12 +355,40 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 
 ##### 18-11-26
 
-- [ ] date 추출되는지 확인할 것!
+- [x] date 추출되는지 확인할 것!
+- [x] python -> vm에서 
 - [ ] hbase 저장할 column 지정(날짜를 맨 앞에 리트윗수, word, @, 해시태그...)
+- [x] python module묶어서 oozie 
+
+> :bug:
+>
+> `SyntaxError: Non-ASCII character '\xec' in file variable.py on line 1,` -> python2버전은 맨 위에 인코딩..
+>
+> python2버전에서는 gcc jpype 잘 됨
+>
+> `UnicodeDecodeError: 'ascii' codec can't decode byte 0xea in position 0: ordinal not in range(128)` -> 
+>
+> ```python
+> #-*- coding: utf-8 -*-
+> import sys
+> reload(sys)
+> sys.setdefaultencoding('utf-8')
+> ```
+>
+> http://www.adaltas.com/en/2018/03/06/execute-python-in-an-oozie-workflow/  -> oozie python module
+>
+> `ImportError: Missing required dependencies ['numpy']` pandas.. 동적import를 바꿔주니 해결
+>
+> `ImportError: cannot import name 'multiarray'`
+>
+
+##### 18-11-27
+
+- [ ] 스파크 인코딩 또는 다른 것으로 바꿀 것..
 
 > 참고
 >
-> https://konlpy-ko.readthedocs.io/ko/v0.4.3/examples/wordcloud/
+> https://konlpy-ko.readthedocs.io/ko/v0.4.3/examples/wordcloud/ 
 >
 > http://word.snu.ac.kr/kosac/lexicon.php
 
@@ -370,10 +398,10 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 > https://www.tableau.com/ko-kr/products/cloud-bi
 >
-> https://www.dremio.com/trump-twitter-sentiment-analysis/
+> https://www.dremio.com/trump-twitter-sentiment-analysis/ > 트럼프
 
 > http://www.zinicap.kr/archives/2433 나중에 이런식으로 수집한 수 아이디 알려주면 될 듯
 >
 > https://github.com/Ahneunjeong/bigdata-foodelivery/blob/master/배달분석발표자료.pdf
 >
-> https://wikidocs.net/16574
+> https://wikidocs.net/16574 > 데이터 전처리 가이드
