@@ -2,6 +2,8 @@
 import pandas as pd
 import datetime
 import numpy as np
+import re
+from hanspell import spell_checker
 from konlpy.tag import Hannanum
 from konlpy.tag import Okt
 # from konlpy.tag import Komoran
@@ -111,9 +113,13 @@ df['word'] = ''
     # df.set_value(row.Index, 'word', word_str)
 
 # 트위터 클래스 변경
-okt = Okt()
+# okt = Okt()
+h = Hannanum()
 for row in df.itertuples():
-    word_str = get_nouns(row.tweet)
+    hangul_text = hangul.sub("",row.tweet)
+    # URLless_string = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', hangul_text)
+    spell_ok = spell_checker.check(hangul_text)
+    word_str = get_nouns(str(spell_ok.checked))
     df.at[row.Index, 'word'] = word_str
 
 # 결측값 있을 시 제거
