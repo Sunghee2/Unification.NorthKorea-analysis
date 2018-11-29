@@ -2,7 +2,7 @@
 import pandas as pd
 import datetime
 import numpy as np
-# from konlpy.tag import Hannanum
+from konlpy.tag import Hannanum
 from konlpy.tag import Okt
 # from konlpy.tag import Komoran
 # from konlpy.tag import Twitter
@@ -40,13 +40,21 @@ def read_data(filepath):
 
 
 # 형태소 분리
-# def get_tags(text):
+# def get_nouns(text):
 #     nouns = h.nouns(text)
 
 #     # count = Counter(nouns)
 #     # print(nouns)
 #     str_nouns = "|".join(nouns)
 #     return str_nouns
+
+def get_nouns(text):
+    pos = h.pos(text, ntags=22, flatten=True)
+    nouns = [item for item in pos if item[1] == 'NC' or item[1] == 'NQ' or item[1] == 'NN']
+    split_nouns = "|".join("%s" % tup[0] for tup in nouns)
+    return split_nouns
+
+
 # def get_tags(text):
 #     pos = komoran.pos(text)
 #     # str_pos = ";".join(map(str, pos))
@@ -57,11 +65,11 @@ def read_data(filepath):
 #     s = classifier.classify(text)
 #     return s
 
-def get_nouns(text):
-    # twitter = Twitter()
-    nouns = okt.nouns(text)
-    str_nouns = "|".join(nouns)
-    return str_nouns
+# def get_nouns(text):
+#     # twitter = Twitter()
+#     nouns = okt.nouns(text)
+#     str_nouns = "|".join(nouns)
+#     return str_nouns
 
 df = read_data('./data/tweet_test.csv')
 
