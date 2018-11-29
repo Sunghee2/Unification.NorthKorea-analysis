@@ -111,10 +111,11 @@ for row in df.itertuples():
 # 결측값 있을 시 제거
 # df['id'].dropna()
 
-# print(df['word'].head())
+# df['word'].head()
+
 
 # csv 저장
-df.to_csv("./data/result.csv", mode="w")
+df[['date', 'word', 'username', 'tweet']].to_csv("./data/result1.csv", mode="w")
 
 
 # test
