@@ -14,8 +14,8 @@ if batch:
         reader = csv.reader(f, delimiter=',')
         next(reader)
         for row in reader:
-            print(row.index)
-            batch.update(row[0], {'tweet': {row[1]: row[2]}})
+            print(row[32])
+            batch.update(row[0], {'tweets': {'문재인': row[20]}}) # 32:date, 20: hastags, 35: word
     
     print("Committing...\n")
     batch.commit(finalize=True)
@@ -24,4 +24,4 @@ if batch:
     print(test.fetch("1"))
 
     print("\n")
-    print(test.fetch("33"))
+    print(test.fetch("2"))
