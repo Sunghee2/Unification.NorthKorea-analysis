@@ -411,9 +411,39 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > :bug:
 >
 > 맞춤법 검사하는데 `ValueError: No JSON object could be decoded`
-
-> 참고
 >
+> 라이브러리 맨날 고쳐쓰는듯.. py_hanspell에서 baseurl, req import 바꿔야됨
+>
+
+##### 18-11-29
+
+> :memo:
+>
+> 불용어 데이터
+>
+> https://github.com/6/stopwords-json 
+>
+> :bug:
+>
+> `xml.etree.ElementTree.ParseError: not well-formed (invalid token) in Python` -> string에 &이 있어서 발생한 오류. 구두점, 특문 다 제거해야겠음.
+>
+> 불용어확인하니깐..뭔가 이상해짐
+
+##### 18-11-30
+
+- [x] sentiment 형태소 별로 분리
+- [x] sentiment dict로 만들기(형태소별로?)
+- [x] 다시 용언도 넣기
+- [x] date별 가장 많은 15개 단어 추출
+
+> 불용어를 konlpy 전에 하니깐 문장이 이상해짐 -> 자르고 불용어 삭제하자
+>
+> 분석 : date count null 삭제
+>
+> :bug:
+>
+> 트위터에서 곷 이런 단어를 인코딩 못함.. -> `str(hangul_text).decode('utf-8', errors="replace")`
+
 > https://konlpy-ko.readthedocs.io/ko/v0.4.3/examples/wordcloud/ 
 >
 > http://word.snu.ac.kr/kosac/lexicon.php
