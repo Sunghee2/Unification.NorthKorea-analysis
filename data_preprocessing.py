@@ -28,9 +28,13 @@ def get_nouns(text):
     pos = h.pos(text, ntags=22, flatten=True)
     nouns = [item for item in pos if item[1] == 'NC' or item[1] == 'NQ' or item[1] == 'NN']
     split_nouns = "|".join("%s" % tup[0] for tup in nouns)
+    for stopword in stopwords.itertuples(): # 불용어 체크
+        if dct.get(stopword._1):
+            del dct[stopword._1]
     return split_nouns
 
 df = read_data('./data/tweet_test.csv')
+stopwords = pd.read_json('./data/stopwords_ko.json')
 
 # 중복 제거
 df = df.drop_duplicates()
