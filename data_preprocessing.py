@@ -5,10 +5,6 @@ import numpy as np
 import re
 from hanspell import spell_checker
 from konlpy.tag import Hannanum
-from konlpy.tag import Okt
-# from konlpy.tag import Komoran
-# from konlpy.tag import Twitter
-from collections import Counter
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -26,11 +22,12 @@ def read_data(filepath):
 
 def get_nouns(text):
     pos = h.pos(text, ntags=22, flatten=True)
-    nouns = [item for item in pos if item[1] == 'NC' or item[1] == 'NQ' or item[1] == 'NN']
-    split_nouns = "|".join("%s" % tup[0] for tup in nouns)
+    nouns = [item for item in pos if item[1] == 'NC' or item[1] == 'NQ' or item[1] == 'NN' or item[1] == 'PV' or item[1] == 'PA']
+    dct = dict(nouns)
     for stopword in stopwords.itertuples(): # 불용어 체크
         if dct.get(stopword._1):
             del dct[stopword._1]
+    split_nouns = "|".join("%s,%s" % tup for tup in dct.items())
     return split_nouns
 
 df = read_data('./data/tweet_test.csv')
@@ -66,13 +63,18 @@ for row in df.itertuples():
 df['word'] = ''
 
 h = Hannanum()
-hangul = re.compile('[^ ㄱ-ㅣ가-힣]+')
-for row in df.head(20).itertuples():
-    hangul_text = hangul.sub("",row.tweet).replace("‘", "").replace("’", "").replace("“", "").replace("”", "")
-    # URLless_string = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', hangul_text)
+sum = 0 
+for row in df.itertuples():
+    sum = sum + 1
+    tweet = str(row.tweet).decode('utf-8', errors='replace').replace("＂", "").replace("［", "").replace("］","")
+    hangul_text = re.sub('[^ ㄱ-ㅣ가-힣]+', '', str(tweet))
+    print(str(hangul_text))
+    print(sum)
+    # spell_ok = spell_checker.check(str(hangul_text))
     spell_ok = spell_checker.check(str(hangul_text))
     word_str = get_nouns(str(spell_ok.checked))
+    # word_str = get_nouns(str(hangul_text).decode('utf-8', errors="replace"))
     df.at[row.Index, 'word'] = word_str
 
 # csv 저장
-# df[['date', 'word', 'username', 'tweet']].to_csv("./data/clean_data.csv", mode="w")
+df[['date', 'word', 'username', 'tweet']].to_csv("./data/clean_data.csv", mode="w")
