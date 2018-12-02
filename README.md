@@ -429,7 +429,9 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 > 불용어확인하니깐..뭔가 이상해짐
 
-##### 18-11-30
+<br/>
+
+##### 18-11-30 & 18-12-01
 
 - [x] sentiment 형태소 별로 분리
 - [x] sentiment dict로 만들기(형태소별로?)
@@ -447,6 +449,35 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > https://konlpy-ko.readthedocs.io/ko/v0.4.3/examples/wordcloud/ 
 >
 > http://word.snu.ac.kr/kosac/lexicon.php
+
+<br/>
+
+##### 18-12-02
+
+- [x] oozie scraper
+- [x] oozie local to hdfs
+- [x] sentiment 함수 (아직 확인 못함)
+
+> dict keyerror나는 게 타입이 안맞아서 그런 것이 아니라 해당 키가 없어서였다..
+>
+> hive
+>
+> oozie는 루트계정에서!
+>
+> :bug:
+>
+> `sudo: no tty present and no askpass program specified` -> oozie에서 sudo했을 때 비밀번호를 알지 못해서 나오는 에러
+>
+> `org.apache.oozie.action.hadoop.launcherexception: output data exceeds its limit [2048]	`-> oozie에서 출력이 너무 많아서 생기는 에러. capture output을 끄고 실행하면 됨
+>
+> oozie에서 폴더 permission denied 됨..-> chmod 변경 
+
+##### 18-12-03
+
+- [ ] oozie data_preprocessing
+- [ ] data_preprocessing encoding 확인
+- [ ] get_sentiment 확인
+- [ ] 실제 데이터로 돌리기
 
 > 데이터 시각화
 >
