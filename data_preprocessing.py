@@ -66,7 +66,7 @@ h = Hannanum()
 sum = 0 
 for row in df.itertuples():
     sum = sum + 1
-    tweet = str(row.tweet).decode('utf-8', errors='replace').replace("＂", "").replace("［", "").replace("］","")
+    tweet = str(row.tweet).decode('utf-8', errors='replace').replace("＂", "").replace("［", "").replace("］","").replace("", "").replace("！", "").replace("？", "")
     hangul_text = re.sub('[^ ㄱ-ㅣ가-힣]+', '', str(tweet))
     print(str(hangul_text))
     print(sum)
@@ -76,5 +76,6 @@ for row in df.itertuples():
     # word_str = get_nouns(str(hangul_text).decode('utf-8', errors="replace"))
     df.at[row.Index, 'word'] = word_str
 
+# print(df['word'])
 # csv 저장
 df[['date', 'word', 'username', 'tweet']].to_csv("./data/clean_data.csv", mode="w")
