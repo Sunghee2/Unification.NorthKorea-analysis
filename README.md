@@ -475,9 +475,15 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 ##### 18-12-03
 
 - [ ] oozie data_preprocessing
-- [ ] data_preprocessing encoding 확인
+- [x] data_preprocessing encoding 확인
 - [ ] get_sentiment 확인
-- [ ] 실제 데이터로 돌리기
+- [x] 실제 데이터로 돌리기
+
+> :two_hearts: -> 이거 왜 안사라지냐 진짜..... U+1F495 다른거 다 사라지는데 왜 혼자... 그만해...제발....
+>
+> 한글 유니코드로 reg 바꿔서 하니깐 잘됨 ㅎㅎ진작....진짜 중요하다 잊지말아라.. 유니코드...
+>
+>
 
 > 데이터 시각화
 >
