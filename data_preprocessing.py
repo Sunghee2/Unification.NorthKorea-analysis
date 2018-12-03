@@ -30,7 +30,7 @@ def get_nouns(text):
     split_nouns = "|".join("%s,%s" % tup for tup in dct.items())
     return split_nouns
 
-df = read_data('./data/tweet_test.csv')
+df = read_data('./data/tweets-5.csv')
 stopwords = pd.read_json('./data/stopwords_ko.json')
 
 # 중복 제거
@@ -48,34 +48,40 @@ df['date'] = df['date_time'].dt.date
 # tweet column 타입 string으로 변경 & 소문자로 변경
 df['tweet'] = df.tweet.astype(str)
 df['tweet'] = df['tweet'].apply(lambda x: x.lower())
- 
-# hashtag 분리
-df['hashtag'] = df['tweet'].str.findall(r'#.*?(?=\s|$)')
-for row in df.itertuples():
-    df.at[row.Index, 'hashtag'] = "|".join(row.hashtag)
-
-# mention 분리
-df['mention'] = df['tweet'].str.findall(r'@.*?(?=\s|$)')
-for row in df.itertuples():
-    df.at[row.Index, 'mention'] = "|".join(row.mention)
 
 # 단어별로 자른 것 넣을 새로운 column 만들기
 df['word'] = ''
 
 h = Hannanum()
 sum = 0 
+
+emoji_pattern = re.compile("["
+                        u"\U0001F600-\U0001F64F"  # emoticons
+                        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+                        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+                        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                        u"\U00002702-\U000027B0"
+                        u"\U00002600-\U000027BF"
+                        "]+", flags=re.UNICODE)
+
+hangul = re.compile("[^"
+                u"\U0000AC00-\U0000D7AF"
+                "]+", flags=re.UNICODE)
+
 for row in df.itertuples():
     sum = sum + 1
-    tweet = str(row.tweet).decode('utf-8', errors='replace').replace("＂", "").replace("［", "").replace("］","").replace("", "").replace("！", "").replace("？", "")
-    hangul_text = re.sub('[^ ㄱ-ㅣ가-힣]+', '', str(tweet))
+    tweet = str(row.tweet).decode('utf-8', errors='replace').replace("＂", "").replace("［", "").replace("］","").replace("", "").replace("！", "").replace("？", "").replace("｀", "").replace("�", "").replace("＇", "").replace("🥰", "").replace("♥️", "")
+    hangul_text = emoji_pattern.sub(r'', tweet)
+    hangul_text = re.sub(hangul, ' ', hangul_text)
     print(str(hangul_text))
     print(sum)
+    print("==========================")
     # spell_ok = spell_checker.check(str(hangul_text))
-    spell_ok = spell_checker.check(str(hangul_text))
-    word_str = get_nouns(str(spell_ok.checked))
-    # word_str = get_nouns(str(hangul_text).decode('utf-8', errors="replace"))
-    df.at[row.Index, 'word'] = word_str
+    # word_str = get_nouns(str(spell_ok.checked))
+    if(hangul_text.isspace() == False):
+        word_str = get_nouns(str(hangul_text))
+        df.at[row.Index, 'word'] = word_str
 
-# print(df['word'])
 # csv 저장
 df[['date', 'word', 'username', 'tweet']].to_csv("./data/clean_data.csv", mode="w")
+
