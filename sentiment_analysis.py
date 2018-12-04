@@ -110,6 +110,12 @@ tweets.show()
 
 tweets.select(["date", "split_word", "count", "sentiment"]).show()
 
+tweets.select(["date", "split_word", "count", "sentiment"]).write.format('jdbc').options(
+    url='jdbc:mysql://localhost/tweets',
+    driver='com.mysql.jdbc.Driver',
+    dbtable='top_words',
+    user='spark',
+    password=password).mode('append').save()
 
 
 # tweets.select(explode(split('word', '\\|')).alias('word'), to_date('date')).show()
