@@ -102,6 +102,14 @@ tweets = tweets.withColumn("pos", split_col.getItem(1))
 udf_calc = udf(get_sentiment, StringType())
 tweets = tweets.withColumn("sentiment", udf_calc(col("split_word"), col("pos")))
 
+# 용언에 '-다' 추가
+tweets = tweets.withColumn("split_word",\
+                when((tweets.pos == 'PV') | (tweets.pos == 'PA'), concat(col("split_word"), lit("다"))).otherwise(tweets.split_word))
+
+tweets.show()
+
+tweets.select(["date", "split_word", "count", "sentiment"]).show()
+
 
 
 # tweets.select(explode(split('word', '\\|')).alias('word'), to_date('date')).show()
