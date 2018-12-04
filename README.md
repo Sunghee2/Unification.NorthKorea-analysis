@@ -483,6 +483,42 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 > 한글 유니코드로 reg 바꿔서 하니깐 잘됨 ㅎㅎ진작....진짜 중요하다 잊지말아라.. 유니코드...
 >
+
+##### 18-12-04
+
+- [x] get_sentiment 확인
+- [x] 용언에 -다 붙이기
+- [x] spark 결과 -> mysql
+
+> :bug:
+>
+> `sre_constants.error: bad character range` emoji unicode
+>
+> python2 버전에서 cmd 한글 출력 안되면 `str(text).decode('utf-8s')`
+>
+> 용언일 경우 -다 붙이기
+>
+> mysql 한글 물음표 =>  `$ cd /etc/my.cnf` 추가
+>
+> ```
+> [client]
+> default-character-set=utf8
+> 
+> [mysql]
+> default-character-set=utf8
+> 
+> 
+> [mysqld]
+> collation-server = utf8_unicode_ci
+> init-connect='SET NAMES utf8'
+> character-set-server = utf8
+> ```
+>
+> ```sql
+> ALTER DATABASE [DB명] DEFAULT CHARACTER SET utf8;
+> show variables like ‘c%’
+> ```
+>
 >
 
 > 데이터 시각화
@@ -490,6 +526,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > https://m.blog.naver.com/rhkdgns2008/221007479396
 >
 > https://www.tableau.com/ko-kr/products/cloud-bi
+>
+> https://zzsza.github.io/development/2018/08/24/data-visualization-in-python/#
 >
 > https://www.dremio.com/trump-twitter-sentiment-analysis/ > 트럼프
 
