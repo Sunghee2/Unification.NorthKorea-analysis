@@ -380,7 +380,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > `ImportError: Missing required dependencies ['numpy']` pandas.. 동적import를 바꿔주니 해결
 >
 > `ImportError: cannot import name 'multiarray'`
->
+
+<br/>
 
 ##### 18-11-27
 
@@ -393,6 +394,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > :bug:
 >
 > hive로 했는데도 ??뜸.. 인코딩해도... -> 스파크 sql은 쓰지말고..
+
+<br/>
 
 ##### 18-11-28
 
@@ -413,7 +416,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > 맞춤법 검사하는데 `ValueError: No JSON object could be decoded`
 >
 > 라이브러리 맨날 고쳐쓰는듯.. py_hanspell에서 baseurl, req import 바꿔야됨
->
+
+<br/>
 
 ##### 18-11-29
 
@@ -471,6 +475,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > `org.apache.oozie.action.hadoop.launcherexception: output data exceeds its limit [2048]	`-> oozie에서 출력이 너무 많아서 생기는 에러. capture output을 끄고 실행하면 됨
 >
 > oozie에서 폴더 permission denied 됨..-> chmod 변경 
+
+<br/>
 
 ##### 18-12-03
 
@@ -555,8 +561,14 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > `RROR: Exception DBusException: org.freedesktop.DBus.Error.AccessDenied` ->
 >
 > `$ systemctl restart dbus` `$ systemctl restart firewalld`
->
->
+
+<br/>
+
+##### 18-12-07
+
+- [x] scraper 2개 파일 얻도록
+- [x] multiprocessing
+- [x] 전처리 2개
 
 > 데이터 시각화
 >
