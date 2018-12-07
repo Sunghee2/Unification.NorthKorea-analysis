@@ -13,13 +13,10 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # 이전 파일 삭제 
-def remove_file():
-    moon_file = '/home/maria_dev/PresidentMoon-analysis/data/preprocessing/moon/clean_data.csv'
-    unification_file = '/home/maria_dev/PresidentMoon-analysis/data/preprocessing/unification/clean_data.csv'
-    if os.path.isfile(moon_file):
-        os.remove(moon_file)
-    if os.path.isfile(unification_file):
-        os.remove(unification_file)
+def remove_file(folder_name):
+    file = "/home/maria_dev/PresidentMoon-analysis/data/preprocessing/" + folder_name + "/clean_data.csv"
+    if os.path.isfile(file):
+        os.remove(file)
 
 # 파일 읽기
 def read_data(filepath):
@@ -93,10 +90,10 @@ def preprocess(folder_name):
 
 
 if __name__ == '__main__':
-    remove_file()
+    [remove_file(folder_name) for folder_name in ["moon", "unification", "dprk"]]
 
     stopwords = pd.read_json('/home/maria_dev/PresidentMoon-analysis/data/stopwords/stopwords_ko.json')
 
-    pool = multiprocessing.Pool(processes=2)
-    pool.map(preprocess, ["moon", "unification"])
+    pool = multiprocessing.Pool(processes=4)
+    pool.map(preprocess, ["moon", "unification", "dprk"])
 
