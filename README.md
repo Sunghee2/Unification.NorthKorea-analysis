@@ -569,6 +569,21 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 - [x] scraper 2개 파일 얻도록
 - [x] multiprocessing
 - [x] 전처리 2개
+- [x] import hbase
+
+> :memo:
+>
+> hbase 여러 값을 저장하려면 versions 지정해주면 됨! -> starbase에는 없음
+>
+> `alter "test", NAME => "tweets", VERSIONS => 1000000` -> 올바른 방법 아님.. 
+>
+> :bug:
+>
+> `Gcc error: gcc: error trying to exec 'cc1': execvp: No such file or directory` -> `$ sudo yum install gcc-c++`
+>
+> pandas read_json`ValueError: Expected object or value` -> 상대 경로가 잘못된 것
+>
+> hbase안되었던 것은 create(column family)
 
 > 데이터 시각화
 >
