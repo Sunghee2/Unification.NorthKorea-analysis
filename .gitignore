@@ -1,2 +1,5 @@
 
 .DS_Store
+.gitattributes
+data/scraping/moon/git-lfs
+*.sh
