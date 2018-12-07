@@ -1,4 +1,4 @@
-# President-Moon-Jae-in
+# PresidentMoon-analysis
 
 ### 분석
 
@@ -482,7 +482,8 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > :two_hearts: -> 이거 왜 안사라지냐 진짜..... U+1F495 다른거 다 사라지는데 왜 혼자... 그만해...제발....
 >
 > 한글 유니코드로 reg 바꿔서 하니깐 잘됨 ㅎㅎ진작....진짜 중요하다 잊지말아라.. 유니코드...
->
+
+<br/>
 
 ##### 18-12-04
 
@@ -518,6 +519,42 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > ALTER DATABASE [DB명] DEFAULT CHARACTER SET utf8;
 > show variables like ‘c%’
 > ```
+>
+> `spark-submit --packages mysql:mysql-connector-java:5.1.39 [파일 이름]`
+
+<br/>
+
+##### 18-12-05
+
+>:bug:
+>
+>mysql 위처럼 해도 안됨 -> 보낼 때 url을 `jdbc:mysql://localhost/[db_name]?useUnicode=true&characterEncoding=utf-8` -> 해결
+>
+>`java.lang.ClassNotFoundException: om.mysql.jdbc.Driver` -> 제플린에 
+>
+>그래프..pos 나타낼 수 있는게 없음..
+>
+>pyspark 에서 python 2버전
+
+<br/>
+
+##### 18-12-06
+
+- [x] zeppelin helium 설치
+- [x] centos 시간 동기화
+- [ ] percent 구하기
+
+> bubble... 제플린..
+>
+> 즉시 동기화 명령어 `$ chronyc -a makestep`
+>
+> positive, negative, neutral, complex
+>
+> :bug:
+>
+> `RROR: Exception DBusException: org.freedesktop.DBus.Error.AccessDenied` ->
+>
+> `$ systemctl restart dbus` `$ systemctl restart firewalld`
 >
 >
 
