@@ -1,27 +1,33 @@
 from starbase import Connection
 import csv
 
-c = Connection()
-test = c.table('test')
-if (test.exists()):
-    test.drop()
-test.create('test')
-
-batch = test.batch()
-if batch:
+def update(folder_name):
     print("Batch update... \n")
-    with open("./data/result.csv", "r", encoding="utf-8") as f:
+    print(folder_name)
+    with open("/home/maria_dev/PresidentMoon-analysis/data/preprocessing/" + folder_name + "/clean_data.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f, delimiter=',')
         next(reader)
         for row in reader:
-            print(row[32])
-            batch.update(row[0], {'tweets': {'문재인': row[20]}}) # 32:date, 20: hastags, 35: word
-    
-    print("Committing...\n")
-    batch.commit(finalize=True)
+            print(row[1])
+            batch.update(folder_name, { 'date' : { row[1] : row[2] }}) # 1: date, 2: word
 
-    print("Get ratings for users...\n")
-    print(test.fetch("1"))
 
-    print("\n")
-    print(test.fetch("2"))
+if __name__ == '__main__':
+    c = Connection()
+    twitter = c.table('twitter')
+    # if (twitter.exists()):
+    #     twitter.drop()
+    twitter.create("date")
+
+    batch = twitter.batch()
+
+    if batch:
+        # with open("/home/maria_dev/PresidentMoon-analysis/data/preprocessing/" + folder_name + "/clean_data.csv", "r", encoding="utf-8") as f:
+        #     reader = csv.reader(f, delimiter=',')
+        #     next(reader)
+        #     for row in reader:
+        #         print(row[1])
+        #         batch.update(row[1], { "tweets": { "moon": row[2] }}) # 1: date, 2: word
+        # update("moon")
+        [update(folder_name) for folder_name in ["moon", "unification", "dprk"]]
+        batch.commit(finalize=True)
