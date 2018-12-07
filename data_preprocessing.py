@@ -4,6 +4,7 @@ import datetime
 import numpy as np
 import re
 import multiprocessing
+import os
 from hanspell import spell_checker
 from konlpy.tag import Hannanum
 
@@ -34,6 +35,7 @@ def read_data(filepath):
 
 # 명사, 용언 추출
 def extract_pos(text):
+    h = Hannanum()
     pos = h.pos(text, ntags=22, flatten=True)
     pos_list = [item for item in pos if item[1] == 'NC' or item[1] == 'NQ' or item[1] == 'NN' or item[1] == 'PV' or item[1] == 'PA']
     dct = dict(pos_list)
@@ -45,7 +47,7 @@ def extract_pos(text):
 
 # 전처리
 def preprocess(folder_name):
-    df = read_data('/home/maria_dev/PresidentMoon-analysis/data/scraping' + folder_name + "/tweets.csv")
+    df = read_data('/home/maria_dev/PresidentMoon-analysis/data/scraping/' + folder_name + "/tweets.csv")
 
     # 중복 제거
     df = df.drop_duplicates()
@@ -66,13 +68,15 @@ def preprocess(folder_name):
     # 단어별로 자른 것 넣을 새로운 column 만들기
     df['word'] = ''
 
-    h = Hannanum()
-
     hangul = re.compile("[^"
                     u"\U0000AC00-\U0000D7AF"
                     "]+", flags=re.UNICODE)
 
+    sum = 0
+
     for row in df.itertuples():
+        sum = sum + 1
+        print(sum)
         tweet = str(row.tweet).decode('utf-8', errors='replace')
         hangul_text = re.sub(hangul, ' ', tweet)
         if(hangul_text.isspace() == False):
@@ -91,8 +95,8 @@ def preprocess(folder_name):
 if __name__ == '__main__':
     remove_file()
 
-    stopwords = pd.read_json('/home/maria_dev/PresidentMoon-analysis/data/stopword/stopwords_ko.json')
+    stopwords = pd.read_json('/home/maria_dev/PresidentMoon-analysis/data/stopwords/stopwords_ko.json')
 
     pool = multiprocessing.Pool(processes=2)
-    pool.map(scraping, ["moon", "unification"])
+    pool.map(preprocess, ["moon", "unification"])
 
