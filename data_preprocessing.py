@@ -85,8 +85,11 @@ def preprocess(folder_name):
                 word_str = extract_pos(str(spell_ok.checked))
             df.at[row.Index, 'word'] = word_str
 
+    df = df[['date', 'word']].groupby('date').sum()
+    # df = df[['date', 'word']].groupby('date')
+
     # csv 저장
-    df[['date', 'word']].to_csv("/home/maria_dev/PresidentMoon-analysis/data/preprocessing/" + folder_name + "/clean_data.csv", mode="w")
+    df.to_csv("/home/maria_dev/PresidentMoon-analysis/data/preprocessing/" + folder_name + "/clean_data.csv", mode="w")
 
 
 if __name__ == '__main__':
