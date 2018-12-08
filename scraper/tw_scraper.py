@@ -6,13 +6,10 @@ import twint
 from datetime import date, timedelta
 
 # 이전 파일 삭제 
-def remove_file():
-    moon_file = '/home/maria_dev/PresidentMoon-analysis/data/scraping/moon/tweets.csv'
-    unification_file = '/home/maria_dev/PresidentMoon-analysis/data/scraping/unification/tweets.csv'
-    if os.path.isfile(moon_file):
-        os.remove(moon_file)
-    if os.path.isfile(unification_file):
-        os.remove(unification_file)
+def remove_file(folder_name):
+    file = "/home/maria_dev/PresidentMoon-analysis/data/scraping/" + folder_name + "/tweets.csv"
+    if os.path.isfile(file):
+        os.remove(file)
 
 # args[0] = 검색할 텍스트  args[1] = 폴더명
 def scraping(args):
@@ -27,11 +24,11 @@ def scraping(args):
     twint.run.Search(c)
 
 if __name__ == '__main__':
-    remove_file()
+    [remove_file(folder_name) for folder_name in ["moon", "unification", "dprk"]]
 
     # 크롤링할 어제 날짜 구하기
     yesterday = date.today() - timedelta(1)
     before_yesterday = yesterday - timedelta(1)
 
-    pool = multiprocessing.Pool(processes=2)
-    pool.map(scraping, [["문재인", "moon"], ["통일", "unification"]])
+    pool = multiprocessing.Pool(processes=3)
+    pool.map(scraping, [["문재인", "moon"], ["통일", "unification"], ["북한", "dprk"]])
