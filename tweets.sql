@@ -1,4 +1,5 @@
 CREATE USER 'spark'@'localhost' IDENTIFIED BY 비밀번호;
+CREATE USER 'zeppelin'@'localhost' IDENTIFIED BY 비밀번호;
 
 CREATE DATABASE IF NOT EXISTS tweets;
 USE tweets;
@@ -12,4 +13,5 @@ CREATE TABLE top_words (
 );
 
 GRANT ALL PRIVILEGES ON tweets.* TO 'spark'@'localhost';
+GRANT SELECT ON tweets.* TO 'zeppelin'@'localhost';
 FLUSH PRIVILEGES;
