@@ -570,6 +570,7 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 - [x] multiprocessing
 - [x] 전처리 2개
 - [x] import hbase
+- [x] zeppelin mysql 연동
 
 > :memo:
 >
@@ -584,6 +585,18 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > pandas read_json`ValueError: Expected object or value` -> 상대 경로가 잘못된 것
 >
 > hbase안되었던 것은 create(column family)
+
+<br/>
+
+##### 18-12-08
+
+- [x] hbase 연동
+- [x] hbase data insert
+- [x] sentiment_analysis 정리
+- [ ] zeppelin hbase 연동
+- [ ] zeppelin 그래프 만들기(날짜)
+- [ ] '북한' 데이터 전처리 -> 
+- [ ] oozie
 
 > 데이터 시각화
 >
@@ -600,3 +613,5 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > https://github.com/Ahneunjeong/bigdata-foodelivery/blob/master/배달분석발표자료.pdf
 >
 > https://wikidocs.net/16574 > 데이터 전처리 가이드
+>
+> http://wiki.gurubee.net/pages/viewpage.action?pageId=28117507
