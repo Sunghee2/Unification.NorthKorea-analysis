@@ -1,48 +1,5 @@
 # PresidentMoon-analysis
 
-### 분석
-
-1. 긍부정 평가(긍정적, 부정적 표현), 긍부정 추이(언제 긍정적이고 부정적이게 되었는가)
-
-2. 연관어 분석 . 페이스북 포스트를 긁어모아 워드클라우드 그림. 무엇이 부각되는지 
-
-   > https://m.blog.naver.com/rhkdgns2008/220984098723
-
-3. 관련 기사 제목
-
-   >  https://m.blog.naver.com/rhkdgns2008/220891923938
-   >
-   > sns를 어떤 감정을 표현하기 위한 도구로 사용하는지
-
-4. 검색량 추이로 사람들의 관심이 증가했는지(네이버 구글), 지역별로도 가능
-
-5. 대중은 어떻게 바라보고 있는가~
-
-
-
-> 트위터 분석 예
->
-> https://m.blog.naver.com/rhkdgns2008/220824770827
->
->
-
-### 데이터 전처리
-
-http://aileen93.tistory.com/128 꼭 참고!!
-
-https://programmers.co.kr/learn/courses/21
-
-https://www.lucypark.kr/courses/2015-dm/text-mining.html
-
-- 특수문자, 단어 형태소 분석 등의 처리 등을 하는 단계
-- 불용어 제거하기
-- 중복데이터 제거
-- 같은 의미를 지니는 텍스트는 카테고리화
-
-### 계획
-
-스크래퍼 계속 밤마다 돌리고 -> 전처리과정(시간 고치고 컬럼.., 단어별로 분류) -> 긍부정 나누기() -> 데이터 분석 -> 시각화
-
 ### Todo List
 
 **2018-11-04**
@@ -145,7 +102,7 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 
 > :memo: 
 >
-> 다시 nifi 도전해보자..!
+> 다시 nifi 도전해보자..! hdf 설치
 >
 > :bug:
 >
@@ -274,7 +231,7 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 > twitter가 계정마다 시간설정 이상하게 되어있음 -> twitter 로그인 -> 설정 에서 고쳐주면 됨. GMT+9(csv는 utc시간)
 >
-> `/usr/bin/env: python3: No such file or directory` -> oozie에 python3 설치해야되는듯...
+> `/usr/bin/env: python3: No such file or directory` -> oozie에 python3 설치해야되는듯... 이미 설치되어있음.
 
 <br/>
 
@@ -347,7 +304,7 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 >
 > :bug:
 >
-> `xcode-select: command not found` 여기서는 xcode CLT 못설치하는데 그럼 로컬에서 해야되는건가....ㅠ
+> `xcode-select: command not found` 여기서는 xcode CLT 못설치하는데 그럼 로컬에서 해야되는건가....ㅠ -> yum으로 gcc 설치 가능
 >
 > `UnicodeDecodeError: 'ascii' codec can't decode byte 0xc2 in position 371: ordinal not in range(128)` -> `with open("./data/result.csv", "r", encoding="utf-8")` 
 
@@ -588,7 +545,7 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 
 <br/>
 
-##### 18-12-08
+##### 18-12-08~09
 
 - [x] hbase 연동
 - [x] hbase data insert
@@ -598,11 +555,21 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 - [ ] '북한' 데이터 전처리 -> 
 - [ ] oozie
 
+> :bug:
+>
+> ntp 동기화 `systemctl enable ntpd` 이거 하니깐 제대로 작동
+>
+> 한국시간 `timedatectl set-timezone Asia/Seoul`
+>
+> `Submitting job to Oozie failed. Please check your definition/configuration. org.apache.oozie.ambari.view.exception.WfmException:`  -> sanbox domain name에 대한 host file 변경
+
+##### 18-12-10
+
+> :bug:
+>
+> `sudo must be owned by uid 0 and have the setuid bit set` -> `chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo`
+
 > 데이터 시각화
->
-> https://m.blog.naver.com/rhkdgns2008/221007479396
->
-> https://www.tableau.com/ko-kr/products/cloud-bi
 >
 > https://zzsza.github.io/development/2018/08/24/data-visualization-in-python/#
 >
@@ -611,7 +578,5 @@ https://www.lucypark.kr/courses/2015-dm/text-mining.html
 > http://www.zinicap.kr/archives/2433 나중에 이런식으로 수집한 수 아이디 알려주면 될 듯
 >
 > https://github.com/Ahneunjeong/bigdata-foodelivery/blob/master/배달분석발표자료.pdf
->
-> https://wikidocs.net/16574 > 데이터 전처리 가이드
 >
 > http://wiki.gurubee.net/pages/viewpage.action?pageId=28117507
