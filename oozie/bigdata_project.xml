@@ -1,0 +1,92 @@
+<workflow-app name="bigdata_project"
+	xmlns="uri:oozie:workflow:0.5">
+	<start to="tweet_scraper-copy"/>
+	<fork name="fork54_1">
+		<path start="mv_moon"></path>
+		<path start="mv_unification"></path>
+		<path start="mv_dprk"></path>
+	</fork>
+	<join name="join55" to="end"></join>
+	<action name="tweet_scraper-copy">
+		<shell
+			xmlns="uri:oozie:shell-action:0.3">
+			<job-tracker>${resourceManager}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<exec>python3.6</exec>
+			<argument>tw_scraper.py</argument>
+			<file>/user/maria_dev/project/tw_scraper.py</file>
+		</shell>
+		<ok to="data_preprocessing-copy"/>
+		<error to="kill"/>
+	</action>
+	<action name="data_preprocessing-copy">
+		<shell
+			xmlns="uri:oozie:shell-action:0.3">
+			<job-tracker>${resourceManager}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<exec>python</exec>
+			<argument>data_preprocessing.py</argument>
+			<file>/user/maria_dev/project/data_preprocessing.py#data_preprocessing.py</file>
+		</shell>
+		<ok to="fork54_1"/>
+		<error to="kill"/>
+	</action>
+	<action name="mv_moon">
+		<shell
+			xmlns="uri:oozie:shell-action:0.3">
+			<job-tracker>${resourceManager}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<prepare>
+				<delete path="/user/maria_dev/project/data/moon"></delete>
+				<mkdir path="/user/maria_dev/project/data/moon"></mkdir>
+			</prepare>
+			<exec>hadoop</exec>
+			<argument>fs</argument>
+			<argument>-put</argument>
+			<argument>/home/maria_dev/PresidentMoon-analysis/data/preprocessing/moon/clean_data.csv</argument>
+			<argument>hdfs:///user/maria_dev/project/data/moon/</argument>
+		</shell>
+		<ok to="join55"/>
+		<error to="kill"/>
+	</action>
+	<action name="mv_unification">
+		<shell
+			xmlns="uri:oozie:shell-action:0.3">
+			<job-tracker>${resourceManager}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<prepare>
+				<delete path="/user/maria_dev/project/data/unification"></delete>
+				<mkdir path="/user/maria_dev/project/data/unification"></mkdir>
+			</prepare>
+			<exec>hadoop</exec>
+			<argument>fs</argument>
+			<argument>-put</argument>
+			<argument>/home/maria_dev/PresidentMoon-analysis/data/preprocessing/unification/clean_data.csv</argument>
+			<argument>hdfs:///user/maria_dev/project/data/unification/</argument>
+		</shell>
+		<ok to="join55"/>
+		<error to="kill"/>
+	</action>
+	<action name="mv_dprk">
+		<shell
+			xmlns="uri:oozie:shell-action:0.3">
+			<job-tracker>${resourceManager}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<prepare>
+				<delete path="/user/maria_dev/project/data/dprk"></delete>
+				<mkdir path="/user/maria_dev/project/data/dprk"></mkdir>
+			</prepare>
+			<exec>hadoop</exec>
+			<argument>fs</argument>
+			<argument>-put</argument>
+			<argument>/home/maria_dev/PresidentMoon-analysis/data/preprocessing/dprk/clean_data.csv</argument>
+			<argument>hdfs:///user/maria_dev/project/data/dprk/</argument>
+		</shell>
+		<ok to="join55"/>
+		<error to="kill"/>
+	</action>
+	<kill name="kill">
+		<message>${wf:errorMessage(wf:lastErrorNode())}</message>
+	</kill>
+	<end name="end"/>
+</workflow-app>
